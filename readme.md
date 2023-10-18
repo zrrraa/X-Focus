@@ -4,7 +4,6 @@ arduinoÊ¹ÓÃµÄÊÇHarvard_TinyMLx¿âÖÐµÄtest_camera.inoÀý³Ì£¬×¢Òâ´®¿Ú²¨ÌØÂÊµÈ²ÎÊýµÄÐ
 
 arduino nano 33 bleºÜÉñÆæ£¬ÎÒÔÝÊ±»¹²»ÄÜÊ¹ÓÃvscodeÉÕÂ¼£¬ËüµÄ´®¿Ú»á±ä
 
-
 Ô¤ÆÚÍê³ÉÈý²½¹¤×÷£º´®¿ÚÓÐÏßÉÏ´«±¾µØ£¬wifiÉÏ´«±¾µØ£¬wifiÉÏ´«ÔÆ·þÎñÆ÷
 
 Ç°¶ËÍøÕ¾µ÷ÓÃSVM.py¶ÔÒÑÉÏ´«µÄÍ¼Ïñ½øÐÐ·ÖÀà
@@ -17,4 +16,10 @@ arduino nano 33 bleºÜÉñÆæ£¬ÎÒÔÝÊ±»¹²»ÄÜÊ¹ÓÃvscodeÉÕÂ¼£¬ËüµÄ´®¿Ú»á±ä
 
 ## 10.17
 
-ÉèÖÃÁË·ÖÖ§±£»¤¹æÔò£¬branchtest
+branchtest
+
+## 10.18
+
+wifiÉÏ´«Í¼ÏñÊý¾Ý£¬Éú³ÉÍ¼ÏñÎÄ¼þ±£´æÔÚ±¾µØÎÄ¼þ¼ÐÖÐ
+
+Ä¿Ç°ÔÚPC¶ËÊ¹ÓÃÍøÂçµ÷ÊÔÖúÊÖ¿ÉÒÔÊÕµ½TCPÍ¸´«µÄÊý¾Ý£¬µ«ÊÇÍ¨¹ýpy½Å±¾Ö±½Ó»ñÈ¡»¹Î´³É¹¦£¬Ô­ÒòÎ´Öª

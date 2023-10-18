@@ -1,16 +1,24 @@
-import serial
+import socket
 import sys  # 导入 sys 模块以获取用户输入
 
 import numpy as np
 import struct
 from matplotlib import pyplot as plt
 
-# 设置串口参数
-ser = serial.Serial('COM15', 250000)  # 请将'COM15'替换为你的串口名称
-file_count = 1  # 文件计数器，用于创建不同的文件
+# 设置TCP服务器的主机和端口
+host = '192.168.124.104'  # 请将 'localhost' 替换为您的服务器主机名或IP地址
+port = 8040  # 请将 1234 替换为您的服务器端口号
 
 # 创建一个列表来存储图像
 images = []
+
+# 建立TCP连接
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect((host, port))
+
+print("connect success!")
+
+file_count = 1  # 文件计数器，用于创建不同的文件
 
 while True:
     data = ""  # 初始化 data 变量
@@ -23,11 +31,18 @@ while True:
     HEXADECIMAL_BYTES = []  # 在循环之外初始化列表
 
     while True:
-        if ser.in_waiting > 0:
-            data = ser.read(ser.in_waiting).decode('utf-8')  # 以 UTF-8 编码读取串口数据
-            with open(data_file, 'a') as file:
-                file.write(data)
-            print("Received data: " + data)  # 输出到控制台
+        data_received = sock.recv(1024).decode('utf-8')  # 以 UTF-8 解码接收到的数据
+
+        if not data_received:
+            break
+
+        data += data_received
+
+        with open(data_file, 'a') as file:
+            file.write(data)
+
+        print("Received data: " + data)  # 输出到控制台
+
         if '\n' in data:  # 检查是否接收到换行符
             break  # 如果接收到换行符，停止循环
 
@@ -39,7 +54,8 @@ while True:
                 HEXADECIMAL_BYTES.append(hex_value.strip())
 
     # 重新格式化字节为图像
-    raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES if x], dtype="i2")
+    raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES if x],
+                         dtype="i2")
     image = np.zeros((len(raw_bytes), 3), dtype=int)
 
     for j in range(len(raw_bytes)):
@@ -58,3 +74,6 @@ while True:
     plt.imsave(output_path, image, format='png')
 
     file_count += 1  # 增加文件计数器以便下一个文件
+
+# 关闭TCP连接
+sock.close()
