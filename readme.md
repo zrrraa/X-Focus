@@ -14,3 +14,7 @@ arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
 串口有线上传图像数据，生成图像文件保存在本地文件夹中
 
 目前给arduino烧录程序后，将终端位置置于CV_Classification，运行test.py，按下按钮后test_photo文件夹中会多一张刚拍的图片。test.py运行后会一直循环，退出需要CTRL+C
+
+## 10.17
+
+设置了分支保护规则，branchtest
