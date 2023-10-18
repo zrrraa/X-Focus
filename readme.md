@@ -17,4 +17,4 @@ arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
 
 ## 10.17
 
-设置了分支保护规则
+设置了分支保护规则，branchtest
