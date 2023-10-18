@@ -1,7 +1,7 @@
 import socket
 
 # 设置TCP服务器的主机和端口
-host = '192.168.124.7'  # 请将 'localhost' 替换为服务器主机名或IP地址
+host = '192.168.43.226'  # 请将 'localhost' 替换为服务器主机名或IP地址
 port = 8040  # 请将 1234 替换为服务器端口号
 
 # 建立TCP连接
