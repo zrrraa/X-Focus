@@ -1,25 +1,37 @@
 # CV_Classification
 
-arduino使用的是Harvard_TinyMLx库中的test_camera.ino例程，注意串口波特率等参数的修改
-
 arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
 
-预期完成三步工作：串口有线上传本地，wifi上传本地，wifi上传云服务器
+运行前将终端位置置于CV_Classification
 
-前端网站调用SVM.py对已上传的图像进行分类
+图像上传，前端网站调用SVM.py对已上传的图像进行分类，通过分类情况生成可视化报告
 
-## 10.16
+## 图像分类
 
-串口有线上传图像数据，生成图像文件保存在本地文件夹中
+参考了https://github.com/chestnut24/SVMImageClassification
 
-目前给arduino烧录程序后，将终端位置置于CV_Classification，运行test.py，按下按钮后test_photo文件夹中会多一张刚拍的图片。test.py运行后会一直循环，退出需要CTRL+C
+添加对test_photo中图片分类的代码
 
-## 10.17
+## 上传
 
-branchtest
+预期路径：串口有线上传本地——>wifi无线上传本地——>wifi上传云端
 
-## 10.18
+上传本地中，上传的图片均储存在SVMImageClassification/test_photo中
 
-wifi上传图像数据，生成图像文件保存在本地文件夹中
+### 串口有线上传本地
+
+arduino的程序为test_camera.ino
+
+给arduino烧录程序后，运行com_upload.py，按下按钮后会进行一次拍照和上传图片。com_upload.py运行后会一直循环
+
+### wifi无线上传本地
+
+arduino的程序为wifi_upload.ino
 
 esp-01做客户端，PC端做服务器，通过TCP协议传输数据
+
+给arduino烧录程序后，运行wifi_upload.py，按下按钮后会进行一次拍照和上传图片。wifi_upload.py运行后会一直循环
+
+## 前端
+
+尝试用一个网站控制分类脚本和监听脚本的运行与中止

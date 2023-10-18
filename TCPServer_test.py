@@ -2,7 +2,7 @@ import socket
 
 # 设置服务器的主机和端口
 host = '192.168.43.226'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
-port = 8888  # 选择一个空闲的端口号
+port = 8040  # 选择一个空闲的端口号
 
 # 创建TCP服务器套接字
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
