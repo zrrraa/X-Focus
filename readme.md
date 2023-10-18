@@ -1,8 +1,9 @@
-# Readme
+# CV_Classification
 
 arduino使用的是Harvard_TinyMLx库中的test_camera.ino例程，注意串口波特率等参数的修改
 
 arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
+
 
 预期完成三步工作：串口有线上传本地，wifi上传本地，wifi上传云服务器
 
