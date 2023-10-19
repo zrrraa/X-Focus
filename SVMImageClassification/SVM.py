@@ -43,8 +43,10 @@ X = np.array(X)
 Y = np.array(Y)
 
 # 随机率为100% 选取其中的20%作为测试集
-X_train, X_test, y_train, y_test = train_test_split(X, Y,
-                                                    test_size=0.3, random_state=1)
+X_train, X_test, y_train, y_test = train_test_split(X,
+                                                    Y,
+                                                    test_size=0.3,
+                                                    random_state=1)
 
 print(len(X_train), len(X_test), len(y_train), len(y_test))
 
@@ -60,12 +62,11 @@ for i in X_train:
     image = cv2.imdecode(np.fromfile(i, dtype=np.uint8), cv2.IMREAD_COLOR)
 
     # 图像像素大小一致
-    img = cv2.resize(image, (256, 256),
-                     interpolation=cv2.INTER_CUBIC)
+    img = cv2.resize(image, (256, 256), interpolation=cv2.INTER_CUBIC)
 
     # 计算图像直方图并存储至X数组
-    hist = cv2.calcHist([img], [0, 1], None,
-                        [256, 256], [0.0, 255.0, 0.0, 255.0])
+    hist = cv2.calcHist([img], [0, 1], None, [256, 256],
+                        [0.0, 255.0, 0.0, 255.0])
 
     XX_train.append(((hist / 255).flatten()))
 
@@ -78,12 +79,11 @@ for i in X_test:
     image = cv2.imdecode(np.fromfile(i, dtype=np.uint8), cv2.IMREAD_COLOR)
 
     # 图像像素大小一致
-    img = cv2.resize(image, (256, 256),
-                     interpolation=cv2.INTER_CUBIC)
+    img = cv2.resize(image, (256, 256), interpolation=cv2.INTER_CUBIC)
 
     # 计算图像直方图并存储至X数组
-    hist = cv2.calcHist([img], [0, 1], None,
-                        [256, 256], [0.0, 255.0, 0.0, 255.0])
+    hist = cv2.calcHist([img], [0, 1], None, [256, 256],
+                        [0.0, 255.0, 0.0, 255.0])
 
     XX_test.append(((hist / 255).flatten()))
 
@@ -144,7 +144,6 @@ print(classification_report(y_test, predictions_labels))
 # labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 # labels = ['条形缺陷', '未焊透', '未熔合', '圆形缺陷']
 labels = [0, 1, 2, 3]
-
 '''
 具体解释一下re_label.txt和pr_label.txt这两个文件，比如你有100个样本
 去做预测，这100个样本中一共有10类，那么首先这100个样本的真实label你一定
@@ -196,12 +195,13 @@ def plot_confusion_matrix(cm, title='Confusion Matrix', cmap=plt.cm.binary):
 
 
 # 生成混淆矩阵的代码，不知道为什么报错了，被我注释掉了
+# 纠正：测试数据太少
 
 cm = confusion_matrix(y_true, y_pred)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print(cm_normalized)
-plt.figure(figsize=(12, 8), dpi=120)
+plt.figure(1, figsize=(12, 8), dpi=120)
 
 ind_array = np.arange(len(labels))
 x, y = np.meshgrid(ind_array, ind_array)
@@ -209,7 +209,13 @@ x, y = np.meshgrid(ind_array, ind_array)
 for x_val, y_val in zip(x.flatten(), y.flatten()):
     c = cm_normalized[y_val][x_val]
     if c > 0.01:
-        plt.text(x_val, y_val, "%0.2f" % (c,), color='red', fontsize=7, va='center', ha='center')
+        plt.text(x_val,
+                 y_val,
+                 "%0.2f" % (c, ),
+                 color='red',
+                 fontsize=7,
+                 va='center',
+                 ha='center')
 # offset the tick
 plt.gca().set_xticks(tick_marks, minor=True)
 plt.gca().set_yticks(tick_marks, minor=True)
@@ -221,10 +227,7 @@ plt.gcf().subplots_adjust(bottom=0.15)
 plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 # show confusion matrix
 plt.savefig('matrix.png', format='png')
-plt.show()
-
-
-
+# plt.show()
 
 # # test1
 
@@ -235,7 +238,7 @@ plt.show()
 # for path in image_paths:
 #     # 读取图像
 #     image = cv2.imread(path)
-    
+
 #     # 调整图像大小
 #     img = cv2.resize(image, (256, 256), interpolation=cv2.INTER_CUBIC)
 
@@ -253,7 +256,6 @@ plt.show()
 # print("预测的标签：")
 # print(predictions_labels)
 
-
 # test2
 
 # 遍历指定文件夹，获取所有图像文件的路径
@@ -268,12 +270,13 @@ XX_test = []
 for path in image_paths:
     # 读取图像
     image = cv2.imread(path)
-    
+
     # 调整图像大小
     img = cv2.resize(image, (256, 256), interpolation=cv2.INTER_CUBIC)
 
     # 计算直方图并将其存储在XX_test中
-    hist = cv2.calcHist([img], [0, 1], None, [256, 256], [0.0, 255.0, 0.0, 255.0])
+    hist = cv2.calcHist([img], [0, 1], None, [256, 256],
+                        [0.0, 255.0, 0.0, 255.0])
     XX_test.append(((hist / 255).flatten()))
 
 # 将XX_test转换为numpy数组
@@ -285,3 +288,26 @@ predictions_labels = clf.predict(XX_test)
 # 打印预测的标签
 print("预测的标签：")
 print(predictions_labels)
+
+
+
+# 对分类情况生成图表报告
+
+# 假设 predictions_labels 包含了您的预测结果
+# predictions_labels = np.array([0, 1, 2, 2, 3])  # 这里是一个示例，您需要将其替换为实际的预测结果
+
+# 计算每个类别的数量
+class_counts = [
+    len(predictions_labels[predictions_labels == i]) for i in range(4)
+]
+
+# 定义类别标签
+labels = ['电脑', '手机', '纸质书籍', '离开']
+
+# 绘制饼状图
+plt.figure(figsize=(6, 6))
+plt.pie(class_counts, labels=labels, autopct='%1.1f%%', startangle=140)
+plt.axis('equal')  # 使饼状图为正圆
+plt.title('预测结果分布')
+
+plt.show()
