@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>智能台灯</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>智能台灯</h1>
+    <p>点击按钮开始工作</p>
+    
+    <button id="runScript1" onclick="startScript(1)">开始监听</button>
+    <button id="runScript2" onclick="startScript(2)">生成报告</button>
+    
+    <p id="script1Status"></p>
+    <p id="script2Status"></p>
+    
+    <script>
+        var script2Running = false; // Track script2 running state
+        
+        function startScript(scriptNumber) {
+            const scriptStatusElement = document.getElementById(`script${scriptNumber}Status`);
+            
+            fetch(`/run_script${scriptNumber}`)
+                .then(response => response.text())
+                .then(data => {
+                    scriptStatusElement.innerText = data;
+                    
+                    // If scriptNumber is 2 and the message is "生成报告中······", keep checking until it's complete
+                    if (scriptNumber === 2 && data === "生成报告中······") {
+                        checkScript2Status();
+                    }
+                });
+        }
+        
+        function checkScript2Status() {
+            fetch('/check_script2')
+                .then(response => response.text())
+                .then(data => {
+                    script2Running = (data === "生成报告中······");
+                    document.getElementById("script2Status").innerText = data;
+                    
+                    if (script2Running) {
+                        // Continue checking until the report is complete
+                        setTimeout(checkScript2Status, 500); // Check every second
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
