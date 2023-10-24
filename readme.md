@@ -1,10 +1,10 @@
 # CV_Classification
 
-arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
-
 运行前将终端位置置于CV_Classification
 
 图像上传，前端网站调用SVM.py对已上传的图像进行分类，通过分类情况生成可视化报告
+
+转接板原理图https://content.arduino.cc/assets/MachineLearningCarrierV1.0.pdf
 
 ## 图像分类
 
@@ -32,6 +32,8 @@ esp-01做客户端，PC端做服务器，通过TCP协议传输数据
 
 给arduino烧录程序后，运行wifi_upload.py，按下按钮后会进行一次拍照和上传图片。wifi_upload.py运行后会一直循环
 
+arduino与esp-01的串口通信采用软串口的形式
+
 ## 前端
 
 尝试用一个网站或上位机来控制分类脚本和监听脚本的运行与中止
@@ -41,3 +43,19 @@ esp-01做客户端，PC端做服务器，通过TCP协议传输数据
 “生成报告”按钮单击一次后开始分类，生成报告，运行时重复点击无效，运行结束后可再次重复点击生成新的报告
 
 打包成.exe需要注意文件相对路径
+
+## 开发者心得
+
+arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
+
+ov7675受电磁干扰很明显
+
+在tinymlsheld头文件中更改摄像头的IO口连接，在电路上用杜邦线更改，出来的图像很奇怪，不确定是否也是受电磁干扰影响
+
+arduino nano 33 ble无法使用SoftwareSerial，不过可以使用UART库
+
+```
+UART softSerial2(digitalPinToPinName(1), digitalPinToPinName(0), NC, NC);
+```
+
+这句代码开启1脚和0脚做软串口，为什么连1脚和0脚也能进行串口收发？想不明白

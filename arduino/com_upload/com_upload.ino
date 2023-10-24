@@ -6,7 +6,7 @@
 */
 
 #include <TinyMLShield.h>
-
+//UART softSerial1(analogPinToPinName(6), analogPinToPinName(7), NC, NC);
 bool commandRecv = false; // flag used for indicating receipt of commands from serial port
 bool liveFlag = false; // flag as true to live stream raw camera bytes, set as false to take single images on command
 bool captureFlag = false;
@@ -16,6 +16,7 @@ byte image[176 * 144 * 2]; // QCIF: 176x144 x 2 bytes per pixel (RGB565)
 int bytesPerFrame;
 
 void setup() {
+  delay(5000);
   Serial.begin(115200);
   while (!Serial);
 

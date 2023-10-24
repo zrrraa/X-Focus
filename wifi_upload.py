@@ -4,8 +4,8 @@ import struct
 from matplotlib import pyplot as plt
 
 # 设置服务器的主机和端口
-host = '192.168.43.226'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
-port = 8040  # 选择一个大于1024的端口号
+host = '192.168.124.7'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
+port = 8090 # 选择一个大于1024的端口号
 
 # 创建TCP服务器套接字
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -57,7 +57,8 @@ while True:
                         HEXADECIMAL_BYTES.append(hex_value.strip())
 
             # 重新格式化字节为图像
-            raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES if x], dtype="i2")
+            raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES if x and x[1:].isalnum()], dtype="i2")
+
             image = np.zeros((len(raw_bytes), 3), dtype=int)
 
             for j in range(len(raw_bytes)):

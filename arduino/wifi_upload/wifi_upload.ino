@@ -7,6 +7,10 @@
 
 #include <TinyMLShield.h>
 
+//a6 TX     a7 RX
+UART softSerial1(analogPinToPinName(6), analogPinToPinName(7), NC, NC);
+
+
 bool commandRecv = false; // flag used for indicating receipt of commands from serial port
 bool liveFlag = false; // flag as true to live stream raw camera bytes, set as false to take single images on command
 bool captureFlag = false;
@@ -18,7 +22,11 @@ int bytesPerFrame;
 void setup() {
   Serial.begin(115200);
   while (!Serial);
+  softSerial1.begin(115200);
+  while(!softSerial1);
+  
 
+  //softSerial1.println("softSerial test");
   initializeShield();
 
   // Initialize the OV7675 camera
@@ -37,19 +45,36 @@ void setup() {
 
   //wifi init
   //Serial.begin(115200);
-  Serial1.begin(115200);
+  // Serial1.begin(115200);
+  // delay(3000);
+  // Serial.println("wifi STA TCP test begin!");
+  // Serial1.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8080");
+  // Serial.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8080,WAITING...");
+  // delay(5000);
+
+  // Serial1.println("AT+CIPMODE=1");
+  // Serial.println("AT+CIPMODE=1,WAITING...");
+  // delay(2000);
+
+  // Serial1.println("AT+CIPSEND");
+  // Serial.println("AT+CIPSEND,WAITING...");
+  // delay(2000);
+
+
+  
+  // softSerial1.listen();
   delay(3000);
-  Serial.println("wifi STA TCP test begin!");
-  Serial1.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8040");
-  Serial.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8040,WAITING...");
+  softSerial1.println("wifi STA TCP test begin!");
+  softSerial1.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8090");
+  softSerial1.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8090,WAITING...");
   delay(5000);
 
-  Serial1.println("AT+CIPMODE=1");
-  Serial.println("AT+CIPMODE=1,WAITING...");
+  softSerial1.println("AT+CIPMODE=1");
+  softSerial1.println("AT+CIPMODE=1,WAITING...");
   delay(2000);
 
-  Serial1.println("AT+CIPSEND");
-  Serial.println("AT+CIPSEND,WAITING...");
+  softSerial1.println("AT+CIPSEND");
+  softSerial1.println("AT+CIPSEND,WAITING...");
   delay(2000);
 }
 
@@ -127,14 +152,14 @@ void loop() {
 
       //wifi upload
       for (int i = 0; i < bytesPerFrame - 1; i += 2) {
-        Serial1.print("0x");
-        Serial1.print(image[i+1], HEX);
-        Serial1.print(image[i], HEX);
+        softSerial1.print("0x");
+        softSerial1.print(image[i+1], HEX);
+        softSerial1.print(image[i], HEX);
         if (i != bytesPerFrame - 2) {
-          Serial1.print(", ");
+          softSerial1.print(", ");
         }
       }
-      Serial1.println();
+      softSerial1.println();
     }
   }
 }
