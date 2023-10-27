@@ -3,7 +3,7 @@ import struct
 from matplotlib import pyplot as plt
 
 # Generate file names for the three txt files: received_data_1.txt, received_data_2.txt, received_data_3.txt
-file_names = [f"serial_data/received_data_{i}.txt" for i in range(1, 4)]
+#file_names = [f"serial_data/received_data_{i}.txt" for i in range(1, 4)]
 
 # Create a list to store the images
 images = []
