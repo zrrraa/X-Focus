@@ -13,7 +13,7 @@ UART softSerial1(analogPinToPinName(6), analogPinToPinName(7), NC, NC);
 
 bool commandRecv = false; // flag used for indicating receipt of commands from serial port
 bool liveFlag = false; // flag as true to live stream raw camera bytes, set as false to take single images on command
-bool captureFlag = false;
+bool captureFlag = true;
 
 // Image buffer;
 byte image[320 * 240 * 2]; // QCIF: 176x144 x 2 bytes per pixel (RGB565)
@@ -140,15 +140,16 @@ void loop() {
       Camera.readFrame(image);
       //Serial.println("\nImage data will be printed out in 3 seconds...");
       delay(3000);
-      for (int i = 0; i < bytesPerFrame - 1; i += 2) {
-        Serial.print("0x");
-        Serial.print(image[i+1], HEX);
-        Serial.print(image[i], HEX);
-        if (i != bytesPerFrame - 2) {
-          Serial.print(", ");
-        }
-      }
-      Serial.println();
+//      for (int i = 0; i < bytesPerFrame - 1; i += 2) {
+//        Serial.print("0x");
+//        Serial.print(image[i+1], HEX);
+//        Serial.print(image[i], HEX);
+//        if (i != bytesPerFrame - 2) {
+//          Serial.print(", ");
+//        }
+//      }
+//      Serial.println();
+      Serial.println("uploading...");
 
       //wifi upload
       for (int i = 0; i < bytesPerFrame - 1; i += 2) {
@@ -160,6 +161,9 @@ void loop() {
         }
       }
       softSerial1.println();
+
+      delay(17000);//20s拍一次
+      captureFlag=true;
     }
   }
 }

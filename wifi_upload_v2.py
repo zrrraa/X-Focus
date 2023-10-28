@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 
 # 设置服务器的主机和端口
 host = '192.168.124.7'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
-port = 8090 # 选择一个大于1024的端口号
+port = 8090  # 选择一个大于1024的端口号
 
 # 创建TCP服务器套接字
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,7 +21,7 @@ print("Server listening on", host, "port", port)
 # 创建一个列表来存储图像
 images = []
 
-file_count =1 # 文件计数器，用于创建不同的文件
+file_count = 1  # 文件计数器，用于创建不同的文件
 while True:
     # 等待客户端连接
     client_socket, client_address = server_socket.accept()
@@ -39,25 +39,41 @@ while True:
         data += received_data
 
         if '\n' in received_data:  # 检查是否接收到换行符
+            print("Received data:", data)  # 输出到控制台
+
             data_file = f'serial_data/received_data_{file_count}.txt'  # 创建一个新的文件名
 
-            # 使用 'w' 模式打开文件，清空文件内容
+            # 使用 'w' 模式打开文件，清空文件内容并保存接收到的数据
             with open(data_file, 'w') as file:
                 file.write(data)
 
-            print("Received data:", data)  # 输出到控制台
-
             HEXADECIMAL_BYTES = []  # 在循环之外初始化列表
 
-            # 打开当前 txt 文件并读取每一行，然后将每一行分割成十六进制值
-            with open(data_file, "r") as file:
-                for line in file:
-                    hex_values = line.strip().split(',')
-                    for hex_value in hex_values:
+            # 拆分数据并进行筛选
+            hex_values = data.strip().split(',')
+            for hex_value in hex_values:
+                try:
+                    value = int(hex_value, 16)
+                    if 0x0 <= value <= 0xffff:
                         HEXADECIMAL_BYTES.append(hex_value.strip())
+                    else:
+                        HEXADECIMAL_BYTES.append("0x0")
+                except ValueError:
+                    HEXADECIMAL_BYTES.append("0x0")
+
+            # 补充或舍去多余的数
+            HEXADECIMAL_BYTES = HEXADECIMAL_BYTES[:76800]  # 舍去多余的数
+
+            while len(HEXADECIMAL_BYTES) < 76800:  # 用 0x0 补充不足的数
+                HEXADECIMAL_BYTES.append("0x0")
+
+            # 将处理后的数据保存到文件
+            dealed_data_file = f'serial_data/received_data_dealed_{file_count}.txt'
+            with open(dealed_data_file, 'w') as file:
+                file.write('\n'.join(HEXADECIMAL_BYTES))
 
             # 重新格式化字节为图像
-            raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES if x and x[1:].isalnum()], dtype="i2")
+            raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES], dtype="i2")
 
             image = np.zeros((len(raw_bytes), 3), dtype=int)
 

@@ -49,12 +49,23 @@ while True:
 
             HEXADECIMAL_BYTES = []  # 在循环之外初始化列表
 
-            # 打开当前 txt 文件并读取每一行，然后将每一行分割成十六进制值
-            with open(data_file, "r") as file:
-                for line in file:
-                    hex_values = line.strip().split(',')
-                    for hex_value in hex_values:
+            # 拆分数据并进行筛选
+            hex_values = data.strip().split(',')
+            for hex_value in hex_values:
+                try:
+                    value = int(hex_value, 16)
+                    if 0x0 <= value <= 0xffff:
                         HEXADECIMAL_BYTES.append(hex_value.strip())
+                    else:
+                        HEXADECIMAL_BYTES.append("0x0")
+                except ValueError:
+                    HEXADECIMAL_BYTES.append("0x0")
+
+            # 补充或舍去多余的数
+            HEXADECIMAL_BYTES = HEXADECIMAL_BYTES[:25344]  # 舍去多余的数
+
+            while len(HEXADECIMAL_BYTES) < 25344:  # 用 0x0 补充不足的数
+                HEXADECIMAL_BYTES.append("0x0")
 
             # 重新格式化字节为图像
             raw_bytes = np.array([int(x, 16) for x in HEXADECIMAL_BYTES if x and x[1:].isalnum()], dtype="i2")

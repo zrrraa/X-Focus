@@ -6,6 +6,8 @@
 
 转接板原理图https://content.arduino.cc/assets/MachineLearningCarrierV1.0.pdf
 
+图像尺寸为QCIF，v2后缀尺寸为QVGA
+
 ## 图像分类
 
 参考了https://github.com/chestnut24/SVMImageClassification
