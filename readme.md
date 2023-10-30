@@ -1,20 +1,63 @@
 # CV_Classification
 
-arduino使用的是Harvard_TinyMLx库中的test_camera.ino例程，注意串口波特率等参数的修改
+运行前将终端位置置于CV_Classification
+
+图像上传，前端网站调用SVM.py对已上传的图像进行分类，通过分类情况生成可视化报告
+
+转接板原理图https://content.arduino.cc/assets/MachineLearningCarrierV1.0.pdf
+
+图像尺寸为QCIF，v2后缀尺寸为QVGA
+
+## 图像分类
+
+参考了https://github.com/chestnut24/SVMImageClassification
+
+添加对test_photo中图片分类的代码
+
+## 上传
+
+预期路径：串口有线上传本地——>wifi无线上传本地——>wifi上传云端
+
+上传本地中，上传的图片均储存在SVMImageClassification/test_photo中
+
+### 串口有线上传本地
+
+arduino的程序为test_camera.ino
+
+给arduino烧录程序后，运行com_upload.py，按下按钮后会进行一次拍照和上传图片。com_upload.py运行后会一直循环
+
+### wifi无线上传本地
+
+arduino的程序为wifi_upload.ino
+
+esp-01做客户端，PC端做服务器，通过TCP协议传输数据
+
+给arduino烧录程序后，运行wifi_upload.py，按下按钮后会进行一次拍照和上传图片。wifi_upload.py运行后会一直循环
+
+arduino与esp-01的串口通信采用软串口的形式
+
+## 前端
+
+尝试用一个网站或上位机来控制分类脚本和监听脚本的运行与中止
+
+“开始监听”按钮单击一次后即一直工作，不会被打断，重复点击无效
+
+“生成报告”按钮单击一次后开始分类，生成报告，运行时重复点击无效，运行结束后可再次重复点击生成新的报告
+
+打包成.exe需要注意文件相对路径
+
+## 开发者心得
 
 arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
 
+ov7675受电磁干扰很明显
 
-预期完成三步工作：串口有线上传本地，wifi上传本地，wifi上传云服务器
+在tinymlsheld头文件中更改摄像头的IO口连接，在电路上用杜邦线更改，出来的图像很奇怪，不确定是否也是受电磁干扰影响
 
-前端网站调用SVM.py对已上传的图像进行分类
+arduino nano 33 ble无法使用SoftwareSerial，不过可以使用UART库
 
-## 10.16
+```
+UART softSerial2(digitalPinToPinName(1), digitalPinToPinName(0), NC, NC);
+```
 
-串口有线上传图像数据，生成图像文件保存在本地文件夹中
-
-目前给arduino烧录程序后，将终端位置置于CV_Classification，运行test.py，按下按钮后test_photo文件夹中会多一张刚拍的图片。test.py运行后会一直循环，退出需要CTRL+C
-
-## 10.17
-
-设置了分支保护规则，branchtest
+这句代码开启1脚和0脚做软串口，为什么连1脚和0脚也能进行串口收发？想不明白
