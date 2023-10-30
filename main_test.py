@@ -3,18 +3,16 @@ import numpy as np
 import struct
 from matplotlib import pyplot as plt
 
-import SVM_call
-
 # 设置服务器的主机和端口
 
 # lab的host
-host = '192.168.124.7'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
+# host = '192.168.124.7'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
 
 # 校网ZJUWLAN的host (校网不能用)
 # host = '10.162.12.159'
 
 # zrrraa个人热点的host
-# host = '192.168.43.226'
+host = '192.168.43.226'
 
 port = 8090  # 选择一个大于1024的端口号
 
@@ -31,10 +29,6 @@ print("Server listening on", host, "port", port)
 
 # 创建一个列表来存储图像
 images = []
-
-# 清空分类情况
-with open('SVMImageClassification/classification_results.txt', 'w') as f:
-    pass
 
 file_count = 1  # 文件计数器，用于创建不同的文件
 
@@ -124,8 +118,6 @@ while True:
 
             output_path = f"SVMImageClassification/test_photo/output_image_{file_count}.png"
             plt.imsave(output_path, image, format='png')
-
-            SVM_call.classify_images(output_path)
 
             file_count += 1  # 增加文件计数器以便下一个文件
 
