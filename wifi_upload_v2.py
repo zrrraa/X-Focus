@@ -6,13 +6,13 @@ from matplotlib import pyplot as plt
 # 设置服务器的主机和端口
 
 # lab的host
-# host = '192.168.124.7'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
+host = '192.168.124.7'  # 监听所有网络接口，请将 'localhost' 替换为服务器的IP地址
 
 # 校网ZJUWLAN的host (校网不能用)
 # host = '10.162.12.159'
 
 # zrrraa个人热点的host
-host = '192.168.43.226'
+# host = '192.168.43.226'
 
 port = 8090  # 选择一个大于1024的端口号
 

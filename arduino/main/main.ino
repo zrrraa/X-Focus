@@ -1,10 +1,13 @@
+
 #include <TinyMLShield.h>
 
 #include <PDM.h>
-#include <Voice_detection_inferencing.h>
+#include <voice_detection_inferencing.h>
 
 // wifi_upload, A6 for TX, A7 for RX
 UART softSerial1(analogPinToPinName(6), analogPinToPinName(7), NC, NC);
+
+
 
 // audio buffers, pointers and selectors
 typedef struct {
@@ -40,7 +43,7 @@ void setup() {
   // initialize the microphone
   if (microphone_inference_start(EI_CLASSIFIER_RAW_SAMPLE_COUNT) == false) {
     ei_printf("ERR: Could not allocate audio buffer (size %d), this could be due to the window length of your model\r\n", EI_CLASSIFIER_RAW_SAMPLE_COUNT);
-    while (1);
+    return;
   }
 
   // initialize the OV7675 camera
@@ -49,6 +52,11 @@ void setup() {
     while (1);
   }
   bytesPerFrame = Camera.width() * Camera.height() * Camera.bytesPerPixel();
+
+  if (microphone_inference_start(EI_CLASSIFIER_RAW_SAMPLE_COUNT) == false) {
+        ei_printf("ERR: Could not allocate audio buffer (size %d), this could be due to the window length of your model\r\n", EI_CLASSIFIER_RAW_SAMPLE_COUNT);
+        return;
+    }
 
   //Serial.println("Welcome to the OV7675 test\n");
   //Serial.println("Available commands:\n");
@@ -107,8 +115,18 @@ void loop() {
     }
   }
 
+  
+
   // noise classfication and upload
   Serial.println("noise classfication and upload");
+  delay(2000);
+
+  bool m = microphone_inference_record();
+  if (!m) {
+    ei_printf("ERR: Failed to record audio...\n");
+    return;
+  }
+  
   signal_t signal;
   signal.total_length = EI_CLASSIFIER_RAW_SAMPLE_COUNT;
   signal.get_data = &microphone_audio_signal_get_data;
@@ -117,7 +135,7 @@ void loop() {
   EI_IMPULSE_ERROR r = run_classifier(&signal, &result, debug_nn);
   if (r != EI_IMPULSE_OK) {
     ei_printf("ERR: Failed to run classifier (%d)\n", r);
-    while (1);
+    return;
   }
   //  // print the predictions
   //  ei_printf("Predictions ");
@@ -129,10 +147,10 @@ void loop() {
   }
   for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
     softSerial1.print(result.classification[ix].value);
-    
+
     if (ix != EI_CLASSIFIER_LABEL_COUNT - 1) {
-        softSerial1.print(", ");
-      }
+      softSerial1.print(", ");
+    }
   }
   softSerial1.print("; ");// ";" to split noise and photo
 #if EI_CLASSIFIER_HAS_ANOMALY == 1
