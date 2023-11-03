@@ -9,7 +9,7 @@
 //UART softSerial1(analogPinToPinName(6), analogPinToPinName(7), NC, NC);
 bool commandRecv = false; // flag used for indicating receipt of commands from serial port
 bool liveFlag = false; // flag as true to live stream raw camera bytes, set as false to take single images on command
-bool captureFlag = false;
+bool captureFlag = true;
 
 // Image buffer;
 byte image[320 * 240 * 2]; // QCIF: 176x144 x 2 bytes per pixel (RGB565)

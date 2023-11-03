@@ -20,8 +20,9 @@ byte image[320 * 240 * 2]; // QCIF: 176x144 x 2 bytes per pixel (RGB565)
 long long bytesPerFrame;
 
 void setup() {
+  delay(3000);
   Serial.begin(115200);
-  while (!Serial);
+  //while (!Serial);
   softSerial1.begin(115200);
   while(!softSerial1);
   
