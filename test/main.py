@@ -78,7 +78,7 @@ while True:
             float3_sum += float_data[2]
 
             # 更新到文件 "AudioClassfication/audio_record.txt"
-            with open("AudioClassfication/audio_record.txt", 'w') as file:
+            with open("AudioClassification/audio_record.txt", 'w') as file:
                 file.write(f"{float1_sum},{float2_sum},{float3_sum}\n")
 
             # 处理十六进制数据

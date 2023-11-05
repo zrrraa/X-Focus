@@ -189,7 +189,7 @@ void loop() {
     captureFlag = true;
 
     //time interval
-    delay(17000);//20s一次
+    delay(5000);//20s一次
 
   }
 }

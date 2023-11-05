@@ -1,3 +1,2 @@
 SVMImageClassification/test_photo/output_image_1.png: 0
 SVMImageClassification/test_photo/output_image_2.png: 0
-SVMImageClassification/test_photo/output_image_3.png: 0

@@ -1,6 +1,7 @@
 # CV_Classification
 
-运行前将终端位置置于CV_Classification
+运行前将终端位置置于CV_Classification，运行mymain.py
+
 
 图像上传并进行分类，前端通过分类情况生成可视化报告
 
