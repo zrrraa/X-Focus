@@ -106,7 +106,9 @@ void loop() {
           Serial.print(", ");
         }
       }
+      captureFlag = true;
       Serial.println();
+      delay(3000);
     }
   }
 }

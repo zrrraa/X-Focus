@@ -564,6 +564,9 @@ border-radius:30px
        <property name="scaledContents">
         <bool>true</bool>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </widget>
      <widget class="QFrame" name="frame_13">
@@ -844,7 +847,7 @@ color: rgb(55,55,55);</string>
      <string>end</string>
     </property>
     <property name="icon">
-     <iconset resource="../../../onedrive/OneDrive - zju.edu.cn/桌面/Copying_1006/resources.qrc">
+     <iconset>
       <normaloff>:/svg/img/svg/对号1.png</normaloff>:/svg/img/svg/对号1.png</iconset>
     </property>
     <property name="iconSize">
@@ -875,7 +878,7 @@ color: rgb(55,55,55);</string>
      <string>start </string>
     </property>
     <property name="icon">
-     <iconset theme="accessories-calculator" resource="../../../onedrive/OneDrive - zju.edu.cn/桌面/Copying_1006/resources.qrc">
+     <iconset theme="accessories-calculator">
       <normaloff>:/svg/img/svg/对号1 (1).png</normaloff>:/svg/img/svg/对号1 (1).png</iconset>
     </property>
     <property name="iconSize">
@@ -904,7 +907,7 @@ padding:12px;</string>
      <string>Exit</string>
     </property>
     <property name="icon">
-     <iconset resource="../../../onedrive/OneDrive - zju.edu.cn/桌面/Copying_1006/resources.qrc">
+     <iconset>
       <normaloff>:/buttom/img/buttom/退出文件夹_folder-withdrawal.svg</normaloff>:/buttom/img/buttom/退出文件夹_folder-withdrawal.svg</iconset>
     </property>
    </widget>
@@ -975,7 +978,7 @@ color: rgb(55,55,55);</string>
      <string>log out</string>
     </property>
     <property name="icon">
-     <iconset resource="../../../onedrive/OneDrive - zju.edu.cn/桌面/Copying_1006/resources.qrc">
+     <iconset>
       <normaloff>:/svg/img/svg/对号1.png</normaloff>:/svg/img/svg/对号1.png</iconset>
     </property>
     <property name="iconSize">
@@ -985,10 +988,23 @@ color: rgb(55,55,55);</string>
      </size>
     </property>
    </widget>
+   <widget class="QLabel" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>
-  <include location="../../../onedrive/OneDrive - zju.edu.cn/桌面/Copying_1006/resources.qrc"/>
+  <include location="back_ground.qrc"/>
  </resources>
  <connections/>
 </ui>

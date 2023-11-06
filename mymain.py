@@ -88,6 +88,10 @@ class MysignupForm(QMainWindow, Ui_signup):
                 QPixmap("dependencies/images/signup.jpg").scaled(
                     MysignupForm.size(self), QtCore.Qt.IgnoreAspectRatio,
                     QtCore.Qt.SmoothTransformation)))
+        self.signup_ui.label_5.setPixmap(
+            QPixmap('dependencies/images/x_focus_black').scaled(
+                self.signup_ui.label_5.size(), QtCore.Qt.IgnoreAspectRatio,
+                QtCore.Qt.SmoothTransformation))  #后面两个命令用于抗锯齿
         self.signup_ui.op1 = QtWidgets.QGraphicsOpacityEffect()
         self.signup_ui.op2 = QtWidgets.QGraphicsOpacityEffect()
         self.signup_ui.op3 = QtWidgets.QGraphicsOpacityEffect()
@@ -141,6 +145,7 @@ class MysignupForm(QMainWindow, Ui_signup):
     def back_up(self):
         mysignup.close()
         mylogin.show()
+        mylogin.data_clean()  #可以直接调用函数进行操作
 
     def signup_db(self):
         self.signup_ui.cursor = self.signup_ui.sql3.cursor()
@@ -182,8 +187,10 @@ class MysignupForm(QMainWindow, Ui_signup):
                     self, "信息", "<font color=\"#000000\">注册成功</font>",
                     QMessageBox.Ok | QMessageBox.Cancel,
                     QMessageBox.Cancel)  #成功
+                mylogin.data_clean()  #可以直接调用函数进行操作
                 mysignup.close()
                 mylogin.show()
+                
 
             else:
                 result2 = QMessageBox.critical(
@@ -234,7 +241,10 @@ class MyloginForm(QMainWindow, Ui_login):
         self.login_ui.backup.setStyleSheet(
             '''QPushButton{background:#222222;border-radius:5px;}QPushButton:hover{background:grey;}'''
         )
-        #self.zhanghao.setStyleSheet("background-color: rgba(255, 132, 139, 0);color : rgb(13,118,114);font-size : 34px;font-family : '微软雅黑';")
+        self.login_ui.zhanghao.setStyleSheet(
+            "background-color: rgba(255, 132, 139, 0);color : rgb(13,50,50);font-size : 34px;font-family : '微软雅黑';")
+        self.login_ui.mima.setStyleSheet(
+            "background-color: rgba(255, 132, 139, 0);color : rgb(13,50,50);font-size : 34px;font-family : '微软雅黑';")
         self.login_ui.label.setStyleSheet(
             '''QLabel{color:rgb(230,230,230);}''')
         self.login_ui.label_2.setStyleSheet(
@@ -242,13 +252,22 @@ class MyloginForm(QMainWindow, Ui_login):
         self.login_ui.label_3.setPixmap(
             QPixmap('dependencies/images/logo.png').scaled(
                 self.login_ui.label_3.size()))
+        self.login_ui.mima.setEchoMode(QLineEdit.Password)
+        self.login_ui.label_4.setPixmap(
+            QPixmap('dependencies/images/x_focus_black_1').scaled(
+                self.login_ui.label_4.size(), QtCore.Qt.IgnoreAspectRatio,
+                QtCore.Qt.SmoothTransformation))  #后面两个命令用于抗锯齿
 
         self.setPalette(self.login_ui.palette)
 
         self.login_ui.login_button.clicked.connect(self.success_sign_in)
         self.login_ui.signup_button.clicked.connect(self.signup)
         self.login_ui.backup.clicked.connect(self.backup)
-
+    
+    def data_clean(self):
+        self.login_ui.zhanghao.setText('')
+        self.login_ui.mima.setText('')
+    
     def backup(self):
         mylogin.close()
 
@@ -322,7 +341,7 @@ class MyMainForm(QMainWindow, Ui_Form):  #创建MyMainForm类，继承两个类�
         self.ui.palette = QPalette()
         #qApp.setStyleSheet()
         self.ui.setupUi(self)  #初始化主窗口，调用ui对象的初始化方法
-        self.setWindowTitle("X-Peer")
+        self.setWindowTitle("X-Focus")
         
         #self.setWindowFlag(Qt.FramelessWindowHint)  #取消边框
         self.ui.op1 = QtWidgets.QGraphicsOpacityEffect()
@@ -375,6 +394,10 @@ class MyMainForm(QMainWindow, Ui_Form):  #创建MyMainForm类，继承两个类�
         self.ui.label_19.setPixmap(
             QPixmap('dependencies/images/icons' + '/compare.png').scaled(
                 self.ui.label_19.size(), QtCore.Qt.IgnoreAspectRatio,
+                QtCore.Qt.SmoothTransformation))  #后面两个命令用于抗锯齿
+        self.ui.logo.setPixmap(
+            QPixmap('dependencies/images/x_focus_orange').scaled(
+                self.ui.logo.size(), QtCore.Qt.IgnoreAspectRatio,
                 QtCore.Qt.SmoothTransformation))  #后面两个命令用于抗锯齿
         self.setGeometry(250, 50, 1200, 800)
         '''self.create_piechart()
@@ -551,7 +574,7 @@ class MyMainForm(QMainWindow, Ui_Form):  #创建MyMainForm类，继承两个类�
 
     def close_page(self):
         mymain.close()
-        mylogin.show()
+
 
     def data_update(self):  #在另一个窗口中调用
         global zhanghao_now

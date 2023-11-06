@@ -1,4 +1,3 @@
-
 #include <TinyMLShield.h>
 
 #include <PDM.h>
@@ -88,17 +87,13 @@ void setup() {
 
   // softSerial1.listen();
   delay(3000);
-  softSerial1.println("wifi STA TCP test begin!");
   softSerial1.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8090");
-  softSerial1.println("AT+CIPSTART=\"TCP\",\"192.168.124.7\",8090,WAITING...");
   delay(5000);
 
   softSerial1.println("AT+CIPMODE=1");
-  softSerial1.println("AT+CIPMODE=1,WAITING...");
   delay(2000);
 
   softSerial1.println("AT+CIPSEND");
-  softSerial1.println("AT+CIPSEND,WAITING...");
   delay(2000);
 }
 

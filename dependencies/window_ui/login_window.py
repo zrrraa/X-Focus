@@ -10,21 +10,19 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_login(object):
     def setupUi(self, login):
         login.setObjectName("login")
         login.resize(1200, 800)
-
+        login.setStyleSheet("")
         self.zhanghao = QtWidgets.QLineEdit(login)
         self.zhanghao.setGeometry(QtCore.QRect(520, 240, 231, 51))
-        #self.zhanghao.setStyleSheet("background-color: rgba(255, 132, 139, 0);")
-        
-        self.zhanghao.setStyleSheet("background-color: rgba(255, 132, 139, 0);color : rgb(230,230,33);font-size : 34px;font-family : '微软雅黑';")
+        self.zhanghao.setStyleSheet("background-color: rgba(255, 132, 139, 0);")
         self.zhanghao.setObjectName("zhanghao")
         self.mima = QtWidgets.QLineEdit(login)
         self.mima.setGeometry(QtCore.QRect(520, 340, 231, 41))
         self.mima.setStyleSheet("background-color: rgba(255, 132, 139, 0);")
-        self.mima.setStyleSheet("background-color: rgba(255, 132, 139, 0);color : rgb(50,50,255);font-size : 34px;font-family : '微软雅黑';")
         self.mima.setObjectName("mima")
         self.label = QtWidgets.QLabel(login)
         self.label.setGeometry(QtCore.QRect(360, 240, 121, 51))
@@ -73,8 +71,11 @@ class Ui_login(object):
         self.backup.setFont(font)
         self.backup.setObjectName("backup")
         self.label_3 = QtWidgets.QLabel(login)
-        self.label_3.setGeometry(QtCore.QRect(440, 30, 261, 161))
+        self.label_3.setGeometry(QtCore.QRect(220, 60, 221, 131))
         self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(login)
+        self.label_4.setGeometry(QtCore.QRect(510, 100, 281, 91))
+        self.label_4.setObjectName("label_4")
 
         self.retranslateUi(login)
         QtCore.QMetaObject.connectSlotsByName(login)
@@ -88,5 +89,4 @@ class Ui_login(object):
         self.signup_button.setText(_translate("login", "注册"))
         self.backup.setText(_translate("login", "退出"))
         self.label_3.setText(_translate("login", "TextLabel"))
-
-  
+        self.label_4.setText(_translate("login", "TextLabel"))

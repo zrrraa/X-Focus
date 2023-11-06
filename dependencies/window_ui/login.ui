@@ -14,9 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QLineEdit" name="zhanghao">
    <property name="geometry">
@@ -112,7 +110,8 @@
     <string>登录</string>
    </property>
    <property name="icon">
-    <iconset theme="applications-accessories"/>
+    <iconset theme="applications-accessories">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -167,10 +166,23 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>30</y>
-     <width>261</width>
-     <height>161</height>
+     <x>220</x>
+     <y>60</y>
+     <width>221</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>100</y>
+     <width>281</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="text">

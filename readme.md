@@ -61,7 +61,7 @@ ov7675的官方转接板原理图D10和D1接线反了，layout是对的
 arduino nano 33 ble无法使用SoftwareSerial，不过可以使用UART库
 
 ```
-UART softSerial2(digitalPinToPinName(1), digitalPinToPinName(0), NC, NC);
+UART softSerial2(digitalPinToPinName(2), digitalPinToPinName(0), NC, NC);
 ```
 
-这句代码开启1脚和0脚做软串口，为什么连1脚和0脚也能进行串口收发？想不明白
+这句代码开启2脚和0脚做软串口，为什么连1脚和0脚也能进行串口收发？想不明白
