@@ -4,6 +4,8 @@
 
 图像和噪声上传并进行分类，前端通过分类情况生成可视化报告
 
+研发人员：钟睿，韩寒，林钊坦，王晨宇
+
 ## 转接板
 
 [调试文档](https://xn4zlkzg4p.feishu.cn/wiki/DSxzwSo8iiLLURkXnTMca9K1nwh?from=from_copylink)
