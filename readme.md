@@ -10,7 +10,7 @@
 
 官方转接板原理图 [官方](https://content.arduino.cc/assets/MachineLearningCarrierV1.0.pdf)
 
-自制转接板 [自制](https://pro.lceda.cn/editor#id=f7357ab4b7e142e686c2cabcdf9fad5d)
+自制转接板 [自制](https://pro.lceda.cn/editor#id=f7357ab4b7e142e686c2cabcdf9fad5d)  V3为更改布线后的版本
 
 ## 图像分类
 
@@ -50,7 +50,7 @@ arduino与esp-01的串口通信采用软串口的形式
 
 pyQT开发，将txt数据全读到数据库中，再显示分类
 
-## 不重要的事
+## 其他
 
 arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
 
