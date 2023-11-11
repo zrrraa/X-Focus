@@ -1,4 +1,4 @@
-# X-Foucs
+# X-Focus
 
 ‘À––mymain.py
 
