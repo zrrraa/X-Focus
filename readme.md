@@ -58,8 +58,6 @@ arduino nano 33 ble很神奇，我暂时还不能使用vscode烧录，它的串口会变
 
 ov7675的官方转接板原理图D10和D1接线反了，layout是对的
 
-在tinymlsheld头文件中更改摄像头的IO口连接，在电路上用杜邦线更改，出来的图像很奇怪，不确定是否也是受电磁干扰影响
-
 arduino nano 33 ble无法使用SoftwareSerial，不过可以使用UART库
 
 ```
