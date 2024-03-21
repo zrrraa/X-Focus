@@ -1,6 +1,6 @@
 # X-Focus 智能桌面伴侣
 
-一个可检测使用者学习和工作情况以及环境噪声的桌面伴侣。在APP内可查看监督报告。
+一个可检测使用者学习和工作情况以及环境噪声的桌面伴侣，在APP内可查看监督报告。
 
 <center class = 'img' >
 <img title="X-Focus" src="image/成品图.jpg" width="65%">
