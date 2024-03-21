@@ -23,19 +23,19 @@ X-Focus诞生于这样的情境之下，旨在打造一款陪伴用户学习与�
 
 开机启动X-Focus
 
-<video src="image/开机.mp4"></video>
+https://github.com/zrrraa/X-Focus/assets/105407119/f7af75d5-0d5c-4295-9356-713c125a4616
 
 使用电脑状态检测
 
-<video src="image/使用电脑.mp4"></video>
+https://github.com/zrrraa/X-Focus/assets/105407119/e276f914-b43a-4757-9397-768390018e64
 
 离开状态检测
 
-<video src="image/离开.mp4"></video>
+https://github.com/zrrraa/X-Focus/assets/105407119/6a12a4db-4bc4-4c27-8759-1919a981f59a
 
 读书状态以及使用手机状态检测
 
-<video src="image/看书和玩手机.mp4"></video>
+https://github.com/zrrraa/X-Focus/assets/105407119/01b09853-e76d-4802-b92e-d4feedbde9a1
 
 用户在每一次学习或工作结束后都可在APP上查看状态报告，并与过去的报告进行对比，分析专注度。
 
